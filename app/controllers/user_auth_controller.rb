@@ -22,6 +22,12 @@ class UserAuthController < ApplicationController
     super([:user, clasz])
   end
 
+  def authenticate_user!
+    return redirect_to accept_invitation_path(:user, invitation_token: params[:invitation_token]) if params[:user_id].present? && params[:invitation_token].present?
+
+    super
+  end
+
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
     flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default

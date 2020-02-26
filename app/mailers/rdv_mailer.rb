@@ -5,6 +5,7 @@ class RdvMailer < ApplicationMailer
   def send_ics_to_user(rdv, user)
     @rdv = rdv
     @user = user
+    user.invite!{ |u| u.skip_invitation = true } if @user.encrypted_password.blank?
     ics = Rdv::Ics.new(rdv: @rdv)
     attachments[ics.name] = { mime_type: 'text/calendar', content: ics.to_ical_for(user) }
     mail(to: user.email, subject: confirmation_subject(@rdv))

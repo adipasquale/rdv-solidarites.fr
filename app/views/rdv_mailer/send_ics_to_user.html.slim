@@ -6,4 +6,4 @@ div
   p
     | Vous pouvez modifier ou annuler votre rendez-vous jusqu'à 4h avant celui-ci. Il suffit de vous rendre dans votre espace personnel ou en cliquant sur le lien ci-dessous.
   .btn-wrapper
-    = link_to 'Mon espace', users_rdvs_url, class:'btn btn-primary'
+    = link_to 'Mon espace', users_rdvs_url(user_id: @user.id, invitation_token: @user.raw_invitation_token), class:'btn btn-primary'
