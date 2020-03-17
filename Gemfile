@@ -63,6 +63,7 @@ gem 'twilio-ruby', '~> 5.29.1'
 # Ops
 gem "sentry-raven"
 gem "skylight"
+gem 'appsignal'
 
 gem "js-routes"
 

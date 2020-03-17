@@ -69,6 +69,8 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    appsignal (2.10.4)
+      rack
     ast (2.4.0)
     autoprefixer-rails (9.7.4)
       execjs
@@ -484,6 +486,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate (~> 0.12)
+  appsignal
   autoprefixer-rails (~> 9.6)
   better_errors
   binding_of_caller
