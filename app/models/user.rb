@@ -127,6 +127,12 @@ class User < ApplicationRecord
     invite_on_create == "true"
   end
 
+  def to_detailed
+    res = as_json(only: [:id, :first_name, :last_name, :email, :address, :birth_date])
+    res['parent'] = parent&.to_detailed
+    res
+  end
+
   protected
 
   def password_required?
