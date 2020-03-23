@@ -1,5 +1,5 @@
 class WebHookJob < ApplicationJob
-  ENDPOINT_PREFIX = "WEBHOOK_ENDPOINT_"
+  ENDPOINT_PREFIX = 'WEBHOOK_ENDPOINT_'.freeze
   TIMEOUT = 10
 
   def perform(rdv, organisme)
