@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_153357) do
+ActiveRecord::Schema.define(version: 2020_03_16_134303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_153357) do
     t.boolean "disable_notifications_for_users", default: false
     t.text "restriction_for_rdv"
     t.text "instruction_for_rdv"
+    t.boolean "for_secretariat", default: false
     t.index ["deleted_at"], name: "index_motifs_on_deleted_at"
     t.index ["organisation_id"], name: "index_motifs_on_organisation_id"
     t.index ["service_id"], name: "index_motifs_on_service_id"
@@ -240,6 +241,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_153357) do
     t.integer "status", default: 0
     t.string "location"
     t.integer "created_by", default: 0
+    t.text "notes"
     t.index ["created_by"], name: "index_rdvs_on_created_by"
     t.index ["motif_id"], name: "index_rdvs_on_motif_id"
     t.index ["organisation_id"], name: "index_rdvs_on_organisation_id"
@@ -298,6 +300,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_153357) do
     t.bigint "parent_id"
     t.datetime "deleted_at"
     t.string "birth_name"
+    t.text "notes"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true, where: "(email IS NOT NULL)"
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
