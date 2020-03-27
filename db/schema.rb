@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_16_134303) do
+ActiveRecord::Schema.define(version: 2020_03_27_140651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,12 @@ ActiveRecord::Schema.define(version: 2020_03_16_134303) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "institutions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "lieux", force: :cascade do |t|
     t.string "name"
     t.bigint "organisation_id"
@@ -202,6 +208,8 @@ ActiveRecord::Schema.define(version: 2020_03_16_134303) do
     t.string "departement"
     t.text "horaires"
     t.string "phone_number"
+    t.bigint "institution_id"
+    t.index ["institution_id"], name: "index_organisations_on_institution_id"
   end
 
   create_table "organisations_users", id: false, force: :cascade do |t|
@@ -322,6 +330,14 @@ ActiveRecord::Schema.define(version: 2020_03_16_134303) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  create_table "webhooks", force: :cascade do |t|
+    t.string "endpoint"
+    t.bigint "organisation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organisation_id"], name: "index_webhooks_on_organisation_id"
+  end
+
   add_foreign_key "absences", "agents"
   add_foreign_key "absences", "organisations"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -332,10 +348,12 @@ ActiveRecord::Schema.define(version: 2020_03_16_134303) do
   add_foreign_key "motif_libelles", "services"
   add_foreign_key "motifs", "organisations"
   add_foreign_key "motifs", "services"
+  add_foreign_key "organisations", "institutions"
   add_foreign_key "plage_ouvertures", "agents"
   add_foreign_key "plage_ouvertures", "lieux"
   add_foreign_key "plage_ouvertures", "organisations"
   add_foreign_key "rdvs", "motifs"
   add_foreign_key "rdvs", "organisations"
   add_foreign_key "users", "users", column: "parent_id"
+  add_foreign_key "webhooks", "organisations"
 end
