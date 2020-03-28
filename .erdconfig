@@ -1,0 +1,13 @@
+attributes:
+    - primary_keys
+    - foreign_keys
+filename: docs/database_schema
+filetype: png
+orientation: horizontal
+exclude:
+    - PaperTrail::Version
+    - ActiveStorage::Blob
+    - ActionText::RichText
+    - ActiveStorage::Attachment
+    - Delayed::Backend::ActiveRecord::Job
+    - Flipflop::Feature
